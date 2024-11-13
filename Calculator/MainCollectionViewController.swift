@@ -31,7 +31,7 @@ class MainCollectionViewController: UIViewController, UICollectionViewDelegate, 
             cell.myButton.setTitle(operators, for: .normal)
             cell.tintColor = .orange
         }
-
+        
         cell.selectedElement = { [weak self] selectedIndex in
             if let buttonText = cell.myButton.titleLabel?.text {
                 self?.calculateElements.append(buttonText)
@@ -41,32 +41,21 @@ class MainCollectionViewController: UIViewController, UICollectionViewDelegate, 
                 }
                 else if buttonText == "=" {
                     self?.calculateAction.text = self?.evaluateExpression()
-                                    self?.calculateElements.removeAll()
+                    self?.calculateElements.removeAll()
                 }
                 else {
-                                    self?.calculateAction.text = self?.calculateElements.joined()
-                                }
+                    self?.calculateAction.text = self?.calculateElements.joined()
+                }
             }
         }
         return cell
     }
+    
     func evaluateExpression() -> String {
         var expression = calculateElements.filter { $0 != "=" }.joined()
-          
-          // Ensure there are no trailing operators
-          if let lastCharacter = expression.last, "+-*/".contains(lastCharacter) {
-              expression.removeLast()
-          }
-          
-          // Use NSExpression to evaluate the expression
-          let exp = NSExpression(format: expression)
-          if let result = exp.expressionValue(with: nil, context: nil) as? NSNumber {
-              return result.stringValue
-          } else {
-              return "Error"
-          }
-      }
-       
-    
-    
+        let calculation = NSExpression(format: expression)
+        let result = calculation.expressionValue(with: nil, context: nil) as? NSNumber
+        return result?.stringValue ?? ""
+
+    }
 }
