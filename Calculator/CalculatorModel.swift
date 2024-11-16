@@ -16,7 +16,7 @@ struct CalculatorStruct {
     
     init() {
         numbers = Array (0...9)
-        operators = ["+","-","*","/","=","C"]
+        operators = ["+","-","*","/","=","C","%"]
         elements = []
         elements.append(contentsOf: numbers)
         elements.append(contentsOf: operators)

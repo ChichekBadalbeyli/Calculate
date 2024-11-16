@@ -43,6 +43,9 @@ class MainCollectionViewController: UIViewController, UICollectionViewDelegate, 
                     self?.calculateAction.text = self?.evaluateExpression()
                     self?.calculateElements.removeAll()
                 }
+                else if buttonText == "%" {
+                    
+                }
                 else {
                     self?.calculateAction.text = self?.calculateElements.joined()
                 }
